@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  dropbox-server:
+    build:
+      context: ./
+    command: npm start
+    volumes:
+      - ./:/devel

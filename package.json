@@ -1,0 +1,11 @@
+{
+  "name": "dropbox-storage",
+  "version": "1.0.0",
+  "description": "spike using dropbox to manage persistent datastore",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "J. Fritz Barnes",
+  "license": "MIT"
+}
