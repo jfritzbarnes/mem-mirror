@@ -5,5 +5,7 @@ services:
     build:
       context: ./
     command: npm start
+    ports:
+      - '9090:8080'
     volumes:
       - ./:/devel
