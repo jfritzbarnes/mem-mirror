@@ -8,6 +8,8 @@ const db = require('sqlite');
 const server = new Hapi.Server();
 server.connection({port: 8080});
 
+server.app.ready = false;
+
 server.register(inert, (err) => {
   if(err) throw err;
 
@@ -33,26 +35,58 @@ server.register(inert, (err) => {
   });
 });
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (req, reply) => {
-    reply('Hello, world!');
-  }
-});
+// load application plugins
+const plugins = [
+  require('./config/logs'),
+  require('./config/routes'),
+];
 
-server.route({
-  method: 'GET',
-  path: '/{name}',
-  handler: (req, reply) => {
-    reply('Hello, ' + encodeURIComponent(req.params.name) + '!');
-  }
-});
+/*function register() {
+  return server.register(plugins);
+}
+exports.register = register;
 
-server.start((err) => {
+function start() {
+  return register(plugins)
+    .then(server.start.bind(server));
+}
+exports.start = start;
+
+exports.server = server;*/
+
+//console.log('going to attempt register...');
+server.register(plugins)
+  .then(() => {
+    /*server.route({
+      method: 'GET',
+      path: '/',
+      handler: (req, reply) => {
+        reply('Hello, world!');
+      }
+    });
+
+    server.route({
+      method: 'GET',
+      path: '/{name}',
+      handler: (req, reply) => {
+        reply('Hello, ' + encodeURIComponent(req.params.name) + '!');
+      }
+    });*/
+
+    return server.start();
+  }).then(() => {
+    console.log(`Server running at: ${server.info.uri}`);
+  }).catch((err) => {
+    console.log(`Server start error: ${err.message}`);
+    console.log(err);
+  });
+  
+
+
+/*server.start((err) => {
   if(err) {
     throw err;
   }
 
   console.log(`Server running at: ${server.info.uri}`);
-});
+});*/
