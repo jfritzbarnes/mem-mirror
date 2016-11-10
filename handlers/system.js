@@ -2,7 +2,7 @@
 
 const Dropbox = require('dropbox');
 
-exports.dbInit = function(request, reply) {
+exports.dbInit = function(req, reply) {
   if(req.server.app.ready) {
     return reply({status: 'fail', message: 'server is in ready state'});
   }

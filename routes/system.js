@@ -13,7 +13,7 @@ routes.push({
 });
 
 routes.push({
-  method: '',
+  method: 'POST',
   path: `${API_BASE_PATH}/dbinit/{token}`,
   handler: System.dbInit
 });
