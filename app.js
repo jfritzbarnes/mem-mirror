@@ -9,6 +9,7 @@ const server = new Hapi.Server();
 server.connection({port: 8080});
 
 server.app.ready = false;
+server.app.nodeEnv = process.env.NODE_ENV || 'production';
 
 server.register(inert, (err) => {
   if(err) throw err;
