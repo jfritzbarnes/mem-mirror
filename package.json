@@ -1,8 +1,8 @@
 {
-  "name": "dropbox-storage",
+  "name": "mem-mirror",
   "version": "1.0.0",
-  "description": "spike using dropbox to manage persistent datastore",
-  "main": "app.js",
+  "description": "support sqlite db container use for persistent data",
+  "main": "mem-mirror.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
