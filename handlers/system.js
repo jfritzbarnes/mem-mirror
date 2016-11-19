@@ -38,14 +38,14 @@ exports.shutdown = function(req, reply) {
 };
 
 exports.addConfig = function(req, reply) {
-  if(!req.server.app.ready) {
+  if(!req.server.app.memMirror.ready) {
     return reply({status: 'fail', message: 'server is not ready'});
   }
 
   console.log(`name=${req.params.name}, value=${req.payload.value}`);
   const sql = 'INSERT INTO config (name, value, updated_at) VALUES (?, ?, ?)';
   const params = [req.params.name, req.payload.value, Date.now()];
-  return req.server.app.db.run(sql, params)
+  return req.server.app.memMirror.getDB().run(sql, params)
     .then((result) => {
       //console.log('insert returned', result);
       return reply({status: 'success'});
@@ -53,12 +53,12 @@ exports.addConfig = function(req, reply) {
 };
 
 exports.getConfig = function(req, reply) {
-  if(!req.server.app.ready) {
+  if(!req.server.app.memMirror.ready) {
     return reply({status: 'fail', message: 'server is not ready'});
   }
 
   const sql = 'SELECT * FROM config WHERE name=?';
-  return req.server.app.db.get(sql, req.params.name)
+  return req.server.app.memMirror.getDB().get(sql, req.params.name)
     .then((data) => {
       //console.log('select returned', data);
       if(!data) {

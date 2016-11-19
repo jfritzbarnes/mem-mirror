@@ -11,12 +11,13 @@ module.exports.checkIfDBExistsLocally = function(mm) {
 
 module.exports.downloadDB = function(mm) {
   console.log(' --- fetch');
+  const dropboxFilename = '/' + path.basename(mm.opts.sqlitePath);
   return mm.dropbox.filesListFolder({path: ''})
   .then((list) => {
-    const file = lodash.find(list.entries, {path_lower: mm.opts.sqlitePath});
+    const file = lodash.find(list.entries, {path_lower: dropboxFilename});
     if(!file) return;
 
-    return mm.dropbox.filesDownload({path: mm.opts.sqlitePath})
+    return mm.dropbox.filesDownload({path: dropboxFilename})
     .then((file) => {
       console.log(' --- downloaded');
       return fs.writeFile(mm.opts.sqlitePath, file.fileBinary, 'binary');

@@ -108,6 +108,11 @@ class MemMirror {
     }
     return p;
   }
+
+  getDB() {
+    if(!this.ready) throw new Error('server is not ready');
+    return this.db;
+  }
 };
 
 module.exports = MemMirror;
