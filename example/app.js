@@ -13,6 +13,9 @@ var opts = {
 };
 const mm = new MemMirror(server, opts);
 
+const routes = require('./routes.js');
+server.route(routes);
+
 mm.prepare()
   .then(() => server.start())
   .then(() => {

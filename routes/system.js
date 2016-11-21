@@ -25,7 +25,7 @@ routes.push({
   handler: System.shutdown
 });
 
-routes.push({
+/*routes.push({
   method: 'GET',
   path: `${API_BASE_PATH}/config/{name}`,
   handler: System.getConfig,
@@ -52,6 +52,6 @@ routes.push({
       }
     }
   }
-});
+});*/
 
 module.exports = routes;

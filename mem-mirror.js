@@ -74,6 +74,10 @@ class MemMirror {
       });
     }
 
+    this.server.decorate('request', 'db', () => {
+      return (this.ready) ? this.db : null;
+    }, {apply: true});
+
     return p;
   }
 
