@@ -9,6 +9,7 @@ server.connection({port: 8080});
 
 var opts = {
   addSimpleUIRoutes: true,
+  dropboxClientID: process.env.CLIENTID,
   migrationsPath: path.resolve(__dirname, '../migrations'),
 };
 const mm = new MemMirror(server, opts);
