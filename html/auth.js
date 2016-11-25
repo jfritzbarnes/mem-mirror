@@ -1,4 +1,4 @@
-var CLIENT_ID = 'dd4y477uqjzcqds';
+var CLIENT_ID = '{{db_clientid}}';
 // Parses the url and gets the access token if it is in the urls hash
 function getAccessTokenFromUrl() {
   return utils.parseQueryString(window.location.hash).access_token;
@@ -100,6 +100,6 @@ if (isAuthenticated()) {
   showPageSection('pre-auth-section');
   // Set the login anchors href using dbx.getAuthenticationUrl()
   var dbx = new Dropbox({ clientId: CLIENT_ID });
-  var authUrl = dbx.getAuthenticationUrl('http://localhost:8080/html/auth');
+  var authUrl = dbx.getAuthenticationUrl('{{authentication_url}}');
   document.getElementById('authlink').href = authUrl;
 }

@@ -19,12 +19,14 @@
     "bluebird": "^3.4.6",
     "bunyan": "^1.8.4",
     "dropbox": "^2.4.0",
+    "handlebars": "^4.0.6",
     "hapi": "^15.2.0",
     "inert": "^4.0.2",
     "joi": "^9.2.0",
     "lodash": "^4.16.6",
     "mz": "^2.5.0",
     "rimraf-promise": "^2.0.0",
-    "sqlite": "^2.2.2"
+    "sqlite": "^2.2.2",
+    "vision": "^4.1.0"
   }
 }

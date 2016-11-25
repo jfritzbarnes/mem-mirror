@@ -9,6 +9,7 @@ const Dropbox = require('dropbox');
 const helpers = require('./src/helpers.js');
 
 const defaultOpts = {
+  dropboxClientID: 'unspecified',
   addSimpleUIRoutes: false,
   addSystemRoutes: true,
   simpleUIRoutesPath: '/mem-mirror',
@@ -39,7 +40,32 @@ class MemMirror {
 
     if(this.opts.addSimpleUIRoutes) {
       p = p.then(() => this.server.register(inert))
+        .then(() => this.server.register(require('vision')))
         .then(() => {
+          this.server.views({
+            engines: {
+              js: {
+                module: require('handlebars'),
+                compileMode: 'sync',
+                path: path.resolve(__dirname, 'html'),
+              }
+            }
+          });
+
+          this.server.route({
+            method: 'GET',
+            path: `${this.opts.simpleUIRoutesPath}/auth.js`,
+            handler: (req, reply) => {
+              const data = {
+                version: '1.0',
+                db_clientid: this.opts.dropboxClientID,
+                authentication_url: 'http://localhost:8080' + this.opts.simpleUIRoutesPath + '/auth'
+              };
+              return reply.view('auth.js', data);
+            }
+          });
+
+          console.log(`adding simple ui at: ${this.opts.simpleUIRoutesPath}`);
           this.server.route({
             method: 'GET',
             path: `${this.opts.simpleUIRoutesPath}/{param*}`,
