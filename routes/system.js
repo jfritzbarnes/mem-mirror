@@ -10,7 +10,7 @@ const routes = [];
 routes.push({
   method: 'GET',
   path: API_BASE_PATH,
-  handler: (req, reply) => { reply({db: {ready: req.server.app.ready}}); }
+  handler: (req, reply) => { reply({db: {ready: req.server.app.memMirror.ready}}); }
 });
 
 routes.push({
