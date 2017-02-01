@@ -13,7 +13,6 @@ exports.dbInit = function(req, reply) {
 
   return req.server.app.memMirror.dbInit(req.params.token)
   .then(() => {
-    req.server.app.ready = true;
     reply({status: 'success'});
   })
   .catch((err) => {
